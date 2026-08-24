@@ -1,0 +1,11 @@
+import type { ReactNode } from "react";
+import type { Metadata } from "next";
+
+import { RootShell } from "@/components/root-shell";
+import { getSiteUrl } from "@/lib/site";
+
+export const metadata: Metadata = { metadataBase: getSiteUrl() };
+
+export default function EnglishLayout({ children }: Readonly<{ children: ReactNode }>) {
+  return <RootShell locale="en">{children}</RootShell>;
+}
