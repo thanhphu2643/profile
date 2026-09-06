@@ -15,7 +15,7 @@ export function CaseStudyCard({ study, locale }: CaseStudyCardProps) {
   return (
     <article className="case-card reveal">
       <Link href={localizedPath(locale, `/work/${study.slug}`)} aria-label={`${study.title[locale]} — ${locale === "en" ? "read case study" : "xem case study"}`}>
-        <WorkflowVisual variant={study.visual} compact />
+        <WorkflowVisual variant={study.visual} locale={locale} compact />
         <div className="case-card-body">
           <div className="case-meta">
             <span>{study.index}</span>

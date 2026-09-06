@@ -6,12 +6,12 @@ import { localizedPath } from "@/lib/i18n";
 import { getSiteUrl } from "@/lib/site";
 
 const descriptions = {
-  en: "Software engineer building reliable ERP, backend, and mobile products with Odoo, Node.js, Flutter, and PostgreSQL.",
-  vi: "Kỹ sư phần mềm xây dựng sản phẩm ERP, backend và mobile đáng tin cậy với Odoo, Node.js, Flutter và PostgreSQL.",
+  en: "Odoo developer in Vietnam specializing in sales, purchasing, inventory, and manufacturing workflows. Custom websites, applications, and integrations.",
+  vi: "Lập trình viên chuyên tùy chỉnh Odoo cho bán hàng, mua hàng, kho và sản xuất. Nhận phát triển website, ứng dụng và tích hợp hệ thống theo yêu cầu.",
 };
 
 export function homeMetadata(locale: Locale): Metadata {
-  const title = locale === "en" ? "Nguyen Thanh Phu — Software Engineer" : "Nguyễn Thanh Phú — Kỹ sư phần mềm";
+  const title = locale === "en" ? "Nguyen Thanh Phu — Odoo Developer | Web & Apps" : "Nguyễn Thanh Phú — Tùy chỉnh Odoo | Web & Ứng dụng";
   const path = localizedPath(locale);
 
   return {

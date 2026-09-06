@@ -6,6 +6,7 @@ import { WorkflowVisual } from "@/components/workflow-visual";
 import { caseStudies, type CaseStudy } from "@/content/portfolio";
 import type { Locale } from "@/lib/i18n";
 import { localizedPath } from "@/lib/i18n";
+import { contactHref } from "@/lib/contact";
 import { siteConfig } from "@/lib/site";
 
 type CaseStudyPageProps = {
@@ -19,15 +20,15 @@ const labels = {
     overview: "Project overview",
     context: "Context",
     problem: "The problem",
-    role: "My role",
-    decisions: "Engineering decisions",
-    validation: "How I validated it",
-    outcomes: "Practical outcomes",
+    role: "My contribution",
+    approach: "How I approached it",
+    validation: "How I checked it",
+    delivered: "Implemented functionality",
     technology: "Technology",
-    confidentiality: "Client details are anonymized. The story focuses on my responsibilities, decisions, and verifiable operational outcomes.",
+    confidentiality: "Client names are omitted. This page describes my contribution to the project.",
     next: "Next case study",
-    contact: "Have a relevant problem to solve?",
-    email: "Start a conversation",
+    contact: "Working on a similar project?",
+    email: "Discuss a project",
     github: "View GitHub",
   },
   vi: {
@@ -35,15 +36,15 @@ const labels = {
     overview: "Tổng quan dự án",
     context: "Bối cảnh",
     problem: "Bài toán",
-    role: "Vai trò của tôi",
-    decisions: "Quyết định kỹ thuật",
-    validation: "Cách tôi kiểm chứng",
-    outcomes: "Kết quả thực tế",
+    role: "Phần tôi thực hiện",
+    approach: "Cách xử lý",
+    validation: "Cách kiểm tra",
+    delivered: "Chức năng đã triển khai",
     technology: "Công nghệ",
-    confidentiality: "Thông tin khách hàng đã được ẩn danh. Nội dung tập trung vào trách nhiệm, quyết định và kết quả vận hành có thể kiểm chứng.",
-    next: "Case study tiếp theo",
+    confidentiality: "Tên khách hàng được giữ ẩn danh. Nội dung mô tả phần việc tôi tham gia trong dự án.",
+    next: "Dự án tiếp theo",
     contact: "Bạn có một bài toán tương tự cần giải quyết?",
-    email: "Bắt đầu trao đổi",
+    email: "Trao đổi dự án",
     github: "Xem GitHub",
   },
 } as const;
@@ -68,9 +69,9 @@ export function CaseStudyPage({ study, locale }: CaseStudyPageProps) {
                 <h1>{study.title[locale]}</h1>
                 <p>{study.summary[locale]}</p>
               </div>
-              <div className="reveal reveal-delay-1"><WorkflowVisual variant={study.visual} /></div>
+              <div className="reveal reveal-delay-1"><WorkflowVisual variant={study.visual} locale={locale} /></div>
             </div>
-            <div className="confidentiality-note"><span>PRIVATE → PUBLIC</span><p>{text.confidentiality}</p></div>
+            {study.visual !== "attendance" && <div className="confidentiality-note"><p>{text.confidentiality}</p></div>}
           </header>
 
           <section className="case-overview" aria-labelledby="overview-title">
@@ -86,22 +87,22 @@ export function CaseStudyPage({ study, locale }: CaseStudyPageProps) {
           </section>
 
           <section className="case-detail shell" aria-labelledby="decisions-title">
-            <div className="detail-heading"><span className="detail-number">01</span><div><span className="eyebrow">{text.decisions}</span><h2 id="decisions-title">{locale === "en" ? "Turning ambiguity into an explicit system." : "Biến yêu cầu chưa rõ thành một hệ thống minh bạch."}</h2></div></div>
+            <div className="detail-heading"><span className="detail-number">01</span><div><h2 id="decisions-title">{text.approach}</h2></div></div>
             <ol className="decision-list">
-              {study.decisions[locale].map((decision, index) => <li key={decision}><span>0{index + 1}</span><p>{decision}</p></li>)}
+              {study.approach[locale].map((decision, index) => <li key={decision}><span>0{index + 1}</span><p>{decision}</p></li>)}
             </ol>
           </section>
 
           <section className="case-detail case-detail-tinted" aria-labelledby="validation-title">
             <div className="shell split-detail">
-              <div className="detail-heading"><span className="detail-number">02</span><div><span className="eyebrow">{text.validation}</span><h2 id="validation-title">{locale === "en" ? "Check the business state, not just the response." : "Kiểm tra trạng thái nghiệp vụ, không chỉ response."}</h2></div></div>
+              <div className="detail-heading"><span className="detail-number">02</span><div><h2 id="validation-title">{text.validation}</h2></div></div>
               <ul className="check-list">{study.validation[locale].map((item) => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}</ul>
             </div>
           </section>
 
           <section className="case-detail shell" aria-labelledby="outcomes-title">
-            <div className="detail-heading"><span className="detail-number">03</span><div><span className="eyebrow">{text.outcomes}</span><h2 id="outcomes-title">{locale === "en" ? "Software that supports the operation." : "Phần mềm phục vụ đúng hoạt động thực tế."}</h2></div></div>
-            <div className="outcome-grid">{study.outcomes[locale].map((outcome, index) => <div key={outcome}><span>0{index + 1}</span><p>{outcome}</p></div>)}</div>
+            <div className="detail-heading"><span className="detail-number">03</span><div><h2 id="outcomes-title">{text.delivered}</h2></div></div>
+            <div className="outcome-grid">{study.delivered[locale].map((outcome, index) => <div key={outcome}><span>0{index + 1}</span><p>{outcome}</p></div>)}</div>
             <div className="technology-row"><span>{text.technology}</span><ul>{study.technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul></div>
           </section>
 
@@ -111,7 +112,7 @@ export function CaseStudyPage({ study, locale }: CaseStudyPageProps) {
           </nav>
 
           <section className="case-contact">
-            <div className="shell"><h2>{text.contact}</h2><div><a className="button button-light" href={`mailto:${siteConfig.email}`}><MailIcon />{text.email}</a><a className="button button-dark-ghost" href={siteConfig.githubUrl} target="_blank" rel="noreferrer"><GitHubIcon />{text.github}<ArrowUpRightIcon /></a></div></div>
+            <div className="shell"><h2>{text.contact}</h2><div><a className="button button-light" href={contactHref(locale, "project")}><MailIcon />{text.email}</a><a className="button button-dark-ghost" href={siteConfig.githubUrl} target="_blank" rel="noreferrer"><GitHubIcon />{text.github}<ArrowUpRightIcon /></a></div></div>
           </section>
         </article>
       </main>

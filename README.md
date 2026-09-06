@@ -1,6 +1,8 @@
 # Nguyen Thanh Phu — Portfolio
 
-A bilingual, recruiter-focused software engineering portfolio built with Next.js, TypeScript, and Tailwind CSS.
+A bilingual Odoo developer portfolio for project clients and recruiters, built with Next.js, TypeScript, and Tailwind CSS. Covers Odoo customization, business workflows, integrations, and custom web/mobile development.
+
+Homepage copy lives in `src/content/home.ts`; anonymized project contributions and experience live in `src/content/portfolio.ts`. Keep service offerings separate from completed work and avoid adding unverified outcomes or metrics. Contact links provide separate project and job enquiry templates in both languages.
 
 ## Local development
 

@@ -11,9 +11,9 @@ export type CaseStudy = {
   context: LocalizedText;
   problem: LocalizedText;
   role: LocalizedText;
-  decisions: Record<Locale, string[]>;
+  approach: Record<Locale, string[]>;
   validation: Record<Locale, string[]>;
-  outcomes: Record<Locale, string[]>;
+  delivered: Record<Locale, string[]>;
   technologies: string[];
   visual: "retail" | "manufacturing" | "integration" | "attendance";
 };
@@ -28,181 +28,297 @@ export type Experience = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "retail-operations",
-    index: "01",
-    type: { en: "ERP · Retail operations", vi: "ERP · Vận hành bán lẻ" },
-    title: { en: "Making complex orders easier to trust", vi: "Giúp đơn hàng phức tạp trở nên đáng tin cậy" },
-    summary: {
-      en: "An Odoo POS and Purchase customization for daily F&B operations involving promotions, loyalty, vouchers, payments, tax, delivery fees, and reporting.",
-      vi: "Giải pháp tùy chỉnh Odoo POS và Purchase cho vận hành F&B hằng ngày với khuyến mãi, tích điểm, voucher, thanh toán, thuế, phí giao hàng và báo cáo.",
+    "slug": "retail-operations",
+    "index": "01",
+    "type": {
+      "en": "Odoo · F&B operations",
+      "vi": "Odoo · Vận hành F&B"
     },
-    context: {
-      en: "Store teams needed to process real orders while keeping every promotion, payment, and receipt detail understandable at the counter and during reconciliation.",
-      vi: "Nhân viên cửa hàng cần xử lý đơn hàng thực tế, đồng thời hiểu rõ từng chi tiết khuyến mãi, thanh toán và hóa đơn tại quầy cũng như khi đối soát.",
+    "title": {
+      "en": "Odoo POS customization for F&B operations",
+      "vi": "Tùy chỉnh Odoo POS cho vận hành F&B"
     },
-    problem: {
-      en: "Rules spread across checkout, loyalty, receipt printing, session reporting, and purchase tracking made edge cases difficult to verify and increased manual checking.",
-      vi: "Quy tắc trải rộng từ thanh toán, loyalty, in hóa đơn, báo cáo phiên đến theo dõi mua hàng khiến các trường hợp biên khó kiểm tra và tăng thao tác thủ công.",
+    "summary": {
+      "en": "Customizing checkout rules, receipts, and session reports in Odoo POS, alongside Purchase changes for F&B operations.",
+      "vi": "Tùy chỉnh quy tắc thanh toán, hóa đơn và báo cáo phiên trên Odoo POS, cùng các phần mở rộng Purchase phục vụ vận hành F&B."
     },
-    role: {
-      en: "Business analysis, Odoo backend development, POS interface customization, testing, and production investigation.",
-      vi: "Phân tích nghiệp vụ, phát triển backend Odoo, tùy chỉnh giao diện POS, kiểm thử và điều tra sự cố production.",
+    "context": {
+      "en": "Store staff handled orders with promotions, loyalty points, vouchers, tax, and delivery fees. They needed to review these details at checkout and when reconciling the sales session.",
+      "vi": "Nhân viên cửa hàng xử lý đơn có khuyến mãi, điểm tích lũy, voucher, thuế và phí giao hàng. Những thông tin này cần được kiểm tra tại quầy và khi đối soát phiên bán hàng."
     },
-    decisions: {
-      en: [
-        "Model promotion, voucher, loyalty, payment, and tax behavior as explicit business rules instead of scattered UI exceptions.",
-        "Expose the details operators need on receipts, reprints, and session reports so bills can be checked without hidden calculations.",
-        "Extend standard Odoo behavior only where the operating flow required it, preserving familiar workflows elsewhere.",
+    "problem": {
+      "en": "A checkout change could also affect the receipt, reprint, and session report. Each part needed to reflect the same order and payment details, including cases with several rules applied together.",
+      "vi": "Một thay đổi ở bước thanh toán có thể ảnh hưởng đến hóa đơn, bản in lại và báo cáo phiên. Các phần này cần thể hiện cùng thông tin đơn hàng và thanh toán, kể cả khi áp dụng nhiều quy tắc cùng lúc."
+    },
+    "role": {
+      "en": "I clarified requirements, developed Odoo backend and POS interface changes, tested business scenarios, and investigated production issues.",
+      "vi": "Tôi làm rõ yêu cầu, phát triển backend Odoo và giao diện POS, kiểm thử tình huống nghiệp vụ và kiểm tra sự cố trên hệ thống đang vận hành."
+    },
+    "approach": {
+      "en": [
+        "Reviewed how promotions, vouchers, loyalty points, tax, and payment methods were applied to an order before implementing the custom rules.",
+        "Updated receipts, reprints, and session reports to show the details staff used to check a bill and reconcile payments.",
+        "Extended POS and Purchase where the requirements called for changes, keeping the standard Odoo workflow for the remaining steps."
       ],
-      vi: [
-        "Mô hình hóa khuyến mãi, voucher, loyalty, thanh toán và thuế thành quy tắc nghiệp vụ rõ ràng thay vì các ngoại lệ rời rạc trên UI.",
-        "Hiển thị thông tin cần thiết trên hóa đơn, bản in lại và báo cáo phiên để nhân viên kiểm tra đơn mà không phụ thuộc vào phép tính ẩn.",
-        "Chỉ mở rộng hành vi chuẩn của Odoo khi luồng vận hành thực sự yêu cầu, giữ nguyên trải nghiệm quen thuộc ở phần còn lại.",
+      "vi": [
+        "Làm rõ cách áp dụng khuyến mãi, voucher, điểm tích lũy, thuế và phương thức thanh toán trên đơn hàng trước khi triển khai quy tắc tùy chỉnh.",
+        "Điều chỉnh hóa đơn, bản in lại và báo cáo phiên để hiển thị thông tin nhân viên cần khi kiểm tra đơn và đối soát thanh toán.",
+        "Mở rộng POS và Purchase ở những phần có yêu cầu riêng; các bước còn lại tiếp tục dùng quy trình chuẩn của Odoo."
+      ]
+    },
+    "validation": {
+      "en": [
+        "Checked orders combining promotions, vouchers, and payment rules.",
+        "Compared order details against receipts, reprints, and session reports.",
+        "Inspected logs and stored records when investigating production issues."
       ],
+      "vi": [
+        "Kiểm tra đơn hàng kết hợp khuyến mãi, voucher và quy tắc thanh toán.",
+        "Đối chiếu thông tin đơn với hóa đơn, bản in lại và báo cáo phiên.",
+        "Xem log và dữ liệu lưu trữ khi kiểm tra sự cố vận hành."
+      ]
     },
-    validation: {
-      en: ["Scenario-based checks for combined promotion and payment cases", "Receipt, reprint, and session-report reconciliation", "Logs and data inspection for production issues"],
-      vi: ["Kiểm tra theo tình huống kết hợp khuyến mãi và thanh toán", "Đối soát hóa đơn, bản in lại và báo cáo phiên", "Kiểm tra log và dữ liệu cho sự cố production"],
+    "delivered": {
+      "en": [
+        "Custom POS handling for promotions, loyalty, vouchers, payments, tax, and delivery fees.",
+        "Receipt, reprint, and session-report changes for order and payment review.",
+        "Purchase customizations for purchasing and inventory record tracking."
+      ],
+      "vi": [
+        "Xử lý tùy chỉnh trên POS cho khuyến mãi, tích điểm, voucher, thanh toán, thuế và phí giao hàng.",
+        "Điều chỉnh hóa đơn, bản in lại và báo cáo phiên phục vụ kiểm tra đơn và thanh toán.",
+        "Tùy chỉnh Purchase phục vụ theo dõi mua hàng và dữ liệu tồn kho."
+      ]
     },
-    outcomes: {
-      en: ["Operators could verify complex bills with less manual checking.", "Purchase and inventory records became easier to trace.", "Daily order and payment review followed a more consistent flow."],
-      vi: ["Nhân viên kiểm tra hóa đơn phức tạp với ít thao tác thủ công hơn.", "Dữ liệu mua hàng và tồn kho dễ truy vết hơn.", "Việc rà soát đơn hàng và thanh toán hằng ngày nhất quán hơn."],
-    },
-    technologies: ["Odoo", "Python", "JavaScript", "OWL", "PostgreSQL", "QWeb"],
-    visual: "retail",
+    "technologies": [
+      "Odoo",
+      "Python",
+      "JavaScript",
+      "OWL",
+      "PostgreSQL",
+      "QWeb"
+    ],
+    "visual": "retail"
   },
   {
-    slug: "manufacturing-control",
-    index: "02",
-    type: { en: "ERP · Manufacturing", vi: "ERP · Sản xuất" },
-    title: { en: "One workflow across teams and vendors", vi: "Một quy trình xuyên suốt đội ngũ và nhà cung cấp" },
-    summary: {
-      en: "A multi-module manufacturing and outsourcing workflow connecting commercial, material, production, subcontracting, and delivery activities.",
-      vi: "Quy trình sản xuất và gia công đa module kết nối hoạt động thương mại, nguyên vật liệu, sản xuất, thầu phụ và giao hàng.",
+    "slug": "manufacturing-control",
+    "index": "02",
+    "type": {
+      "en": "Odoo · Manufacturing",
+      "vi": "Odoo · Sản xuất"
     },
-    context: {
-      en: "A precision-manufacturing operation needed to follow work as it moved between departments and external vendors without losing ownership or status.",
-      vi: "Doanh nghiệp sản xuất chính xác cần theo dõi công việc khi luân chuyển giữa các phòng ban và nhà cung cấp ngoài mà không mất thông tin trách nhiệm hoặc trạng thái.",
+    "title": {
+      "en": "Manufacturing and subcontracting workflows in Odoo",
+      "vi": "Quản lý sản xuất và gia công trên Odoo"
     },
-    problem: {
-      en: "Sales, purchasing, stock, planning, manufacturing, and subcontracting were connected in reality but could be tracked as separate processes in the system.",
-      vi: "Sales, mua hàng, tồn kho, kế hoạch, sản xuất và gia công vốn liên kết trong thực tế nhưng lại có thể bị theo dõi như các quy trình rời rạc trên hệ thống.",
+    "summary": {
+      "en": "Connecting sales, purchasing, inventory, planning, manufacturing, and subcontracting documents within a precision-manufacturing workflow.",
+      "vi": "Kết nối chứng từ bán hàng, mua hàng, kho, kế hoạch, sản xuất và gia công trong quy trình sản xuất chính xác."
     },
-    role: {
-      en: "Requirement clarification, workflow design, custom states and permissions, operational views, backend implementation, and UAT support.",
-      vi: "Làm rõ yêu cầu, thiết kế workflow, trạng thái và phân quyền tùy chỉnh, màn hình vận hành, phát triển backend và hỗ trợ UAT.",
+    "context": {
+      "en": "Work moved between internal departments and external subcontractors. Teams needed to follow material, production progress, finished-goods receiving, and customer delivery.",
+      "vi": "Công việc luân chuyển giữa các bộ phận nội bộ và đơn vị gia công bên ngoài. Các nhóm cần theo dõi vật tư, tiến độ sản xuất, nhập thành phẩm và giao hàng cho khách."
     },
-    decisions: {
-      en: [
-        "Represent operational handoffs with explicit states, transitions, and ownership rules.",
-        "Connect documents across Sales, Purchase, Inventory, MRP, Planning, and Subcontracting instead of duplicating progress tracking.",
-        "Make permissions and available actions reflect the responsibility of each department.",
+    "problem": {
+      "en": "The departments worked on related tasks but tracked them through different modules. Handoffs needed defined states and responsibilities, with links back to the relevant documents.",
+      "vi": "Các phòng ban xử lý những công việc liên quan nhưng theo dõi trên nhiều module. Mỗi bước bàn giao cần có trạng thái, trách nhiệm và liên kết đến chứng từ tương ứng."
+    },
+    "role": {
+      "en": "I clarified requirements, designed workflow changes, implemented custom states, permissions, and operational views, and supported user acceptance testing.",
+      "vi": "Tôi làm rõ yêu cầu, thiết kế thay đổi quy trình, triển khai trạng thái, phân quyền và màn hình vận hành, đồng thời hỗ trợ người dùng kiểm thử nghiệm thu."
+    },
+    "approach": {
+      "en": [
+        "Mapped the documents and handoffs across Sales, Purchase, Inventory, MRP, Planning, and Subcontracting.",
+        "Added workflow states and actions to represent departmental responsibilities and production handoffs.",
+        "Connected subcontracting steps, finished-goods receiving, and delivery to the related upstream documents."
       ],
-      vi: [
-        "Biểu diễn điểm bàn giao vận hành bằng trạng thái, chuyển đổi và quy tắc trách nhiệm rõ ràng.",
-        "Kết nối chứng từ giữa Sales, Purchase, Inventory, MRP, Planning và Subcontracting thay vì lặp lại việc theo dõi tiến độ.",
-        "Thiết kế phân quyền và hành động khả dụng theo đúng trách nhiệm từng phòng ban.",
+      "vi": [
+        "Xác định chứng từ và các bước bàn giao giữa Sales, Purchase, Inventory, MRP, Planning và Subcontracting.",
+        "Bổ sung trạng thái và hành động theo trách nhiệm từng bộ phận và các bước bàn giao trong sản xuất.",
+        "Liên kết công đoạn gia công, nhập thành phẩm và giao hàng với các chứng từ liên quan trước đó."
+      ]
+    },
+    "validation": {
+      "en": [
+        "Traced material and document links through the production flow.",
+        "Checked permissions and available actions for each operational role.",
+        "Ran regression scenarios across the connected modules and supported UAT."
       ],
+      "vi": [
+        "Truy vết vật tư và liên kết chứng từ xuyên suốt quy trình sản xuất.",
+        "Kiểm tra quyền và thao tác được phép của từng vai trò vận hành.",
+        "Kiểm thử lại các luồng liên quan giữa các module và hỗ trợ nghiệm thu."
+      ]
     },
-    validation: {
-      en: ["End-to-end material and document traceability", "Permission checks for each operational role", "Regression scenarios across linked modules"],
-      vi: ["Truy vết nguyên vật liệu và chứng từ đầu-cuối", "Kiểm tra phân quyền cho từng vai trò vận hành", "Kịch bản regression xuyên các module liên kết"],
+    "delivered": {
+      "en": [
+        "Custom states, permissions, and operational views for departmental handoffs.",
+        "Linked records across sales, purchasing, inventory, planning, production, and subcontracting.",
+        "Document links from production and outsourcing through finished-goods receiving and delivery."
+      ],
+      "vi": [
+        "Trạng thái, phân quyền và màn hình vận hành cho các bước bàn giao giữa bộ phận.",
+        "Liên kết dữ liệu bán hàng, mua hàng, kho, kế hoạch, sản xuất và gia công.",
+        "Liên kết chứng từ từ sản xuất, gia công đến nhập thành phẩm và giao hàng."
+      ]
     },
-    outcomes: {
-      en: ["Departments could follow a shared operational state.", "Outsourcing steps became part of the same traceable production flow.", "Finished-goods receiving and customer delivery stayed connected to upstream work."],
-      vi: ["Các phòng ban có thể theo dõi chung một trạng thái vận hành.", "Công đoạn gia công trở thành một phần của luồng sản xuất có thể truy vết.", "Nhập thành phẩm và giao khách hàng tiếp tục liên kết với công việc phía trước."],
-    },
-    technologies: ["Odoo", "Python", "XML", "PostgreSQL", "MRP", "Inventory"],
-    visual: "manufacturing",
+    "technologies": [
+      "Odoo",
+      "Python",
+      "XML",
+      "PostgreSQL",
+      "MRP",
+      "Inventory"
+    ],
+    "visual": "manufacturing"
   },
   {
-    slug: "system-integration",
-    index: "03",
-    type: { en: "Backend · Integration", vi: "Backend · Tích hợp" },
-    title: { en: "Keeping ERP and external systems in sync", vi: "Đồng bộ ERP với các hệ thống bên ngoài" },
-    summary: {
-      en: "Custom Odoo workflows and API-based data exchange that reduced disconnected handling between ERP and external services.",
-      vi: "Workflow Odoo tùy chỉnh và trao đổi dữ liệu qua API nhằm giảm xử lý rời rạc giữa ERP và dịch vụ bên ngoài.",
+    "slug": "system-integration",
+    "index": "03",
+    "type": {
+      "en": "Odoo · Integration",
+      "vi": "Odoo · Tích hợp"
     },
-    context: {
-      en: "Business processes depended on information owned by both Odoo and external systems, making consistent data exchange part of the core workflow.",
-      vi: "Quy trình nghiệp vụ phụ thuộc vào thông tin nằm cả trong Odoo và hệ thống ngoài, khiến trao đổi dữ liệu nhất quán trở thành một phần cốt lõi của workflow.",
+    "title": {
+      "en": "Odoo integrations with external systems",
+      "vi": "Tích hợp Odoo với hệ thống bên ngoài"
     },
-    problem: {
-      en: "Disconnected updates created manual handoffs and made it harder to understand whether data had moved successfully between systems.",
-      vi: "Cập nhật rời rạc tạo ra bước bàn giao thủ công và khiến việc xác định dữ liệu đã truyền thành công giữa các hệ thống trở nên khó khăn.",
+    "summary": {
+      "en": "API-based data exchange and custom Odoo processing for business workflows involving external services.",
+      "vi": "Trao đổi dữ liệu qua API và xử lý tùy chỉnh trên Odoo cho các nghiệp vụ liên quan đến dịch vụ bên ngoài."
     },
-    role: {
-      en: "Integration design, API implementation, custom data handling, failure investigation, and workflow validation.",
-      vi: "Thiết kế tích hợp, triển khai API, xử lý dữ liệu tùy chỉnh, điều tra lỗi và xác thực workflow.",
+    "context": {
+      "en": "Parts of the business process used information from Odoo; other parts relied on external services. Data exchange needed to fit the operation that used those records.",
+      "vi": "Một phần quy trình sử dụng dữ liệu trong Odoo, phần khác phụ thuộc vào dịch vụ bên ngoài. Việc trao đổi dữ liệu cần gắn với nghiệp vụ sử dụng các bản ghi đó."
     },
-    decisions: {
-      en: [
-        "Keep integration behavior close to the business operation it supports rather than treating the API as an isolated feature.",
-        "Make mapping and processing steps explicit so failures can be investigated through logs and stored data.",
-        "Validate both transport success and the resulting ERP state.",
+    "problem": {
+      "en": "A successful API response alone did not explain whether the expected data had been processed in Odoo. Mapping and processing issues needed to be traceable when an exchange failed.",
+      "vi": "API phản hồi thành công chưa đủ để biết dữ liệu đã được xử lý đúng trong Odoo. Khi trao đổi thất bại, cần kiểm tra được bước ánh xạ và xử lý dữ liệu liên quan."
+    },
+    "role": {
+      "en": "I designed integrations, implemented API connections and custom data processing, investigated failures, and checked the resulting workflow.",
+      "vi": "Tôi thiết kế tích hợp, triển khai kết nối API và xử lý dữ liệu tùy chỉnh, kiểm tra lỗi và xác nhận kết quả trong quy trình nghiệp vụ."
+    },
+    "approach": {
+      "en": [
+        "Clarified which data the business operation required and how it mapped between Odoo and the external system.",
+        "Implemented API exchange and the corresponding custom processing in Odoo.",
+        "Used request details, logs, and stored records to investigate failures and check the final Odoo state."
       ],
-      vi: [
-        "Đặt hành vi tích hợp gần với nghiệp vụ mà nó phục vụ thay vì xem API như một tính năng độc lập.",
-        "Làm rõ các bước mapping và xử lý để có thể điều tra lỗi qua log và dữ liệu lưu trữ.",
-        "Xác thực cả kết quả truyền tải lẫn trạng thái ERP sau cùng.",
+      "vi": [
+        "Làm rõ dữ liệu nghiệp vụ cần sử dụng và cách ánh xạ giữa Odoo với hệ thống ngoài.",
+        "Triển khai trao đổi qua API và phần xử lý tùy chỉnh tương ứng trên Odoo.",
+        "Dựa vào thông tin yêu cầu, log và bản ghi lưu trữ để kiểm tra lỗi và xác nhận trạng thái cuối trong Odoo."
+      ]
+    },
+    "validation": {
+      "en": [
+        "Checked request data and field mappings.",
+        "Followed logs and stored records when investigating failed exchanges.",
+        "Verified the resulting Odoo records after data processing."
       ],
+      "vi": [
+        "Kiểm tra dữ liệu gửi nhận và ánh xạ trường.",
+        "Theo dõi log và bản ghi lưu trữ khi kiểm tra lần trao đổi bị lỗi.",
+        "Đối chiếu bản ghi trong Odoo sau khi xử lý dữ liệu."
+      ]
     },
-    validation: {
-      en: ["Payload and mapping checks", "Log-driven failure investigation", "Business-state verification after exchange"],
-      vi: ["Kiểm tra payload và mapping", "Điều tra lỗi dựa trên log", "Xác minh trạng thái nghiệp vụ sau trao đổi"],
+    "delivered": {
+      "en": [
+        "API connections between Odoo and external services.",
+        "Data mappings and custom processing tied to the relevant Odoo workflow.",
+        "Processing steps that could be inspected through logs and stored records."
+      ],
+      "vi": [
+        "Kết nối API giữa Odoo và dịch vụ bên ngoài.",
+        "Ánh xạ và xử lý dữ liệu tùy chỉnh gắn với quy trình Odoo liên quan.",
+        "Các bước xử lý có thể kiểm tra qua log và dữ liệu lưu trữ."
+      ]
     },
-    outcomes: {
-      en: ["ERP data could participate in a continuous cross-system process.", "Manual handoffs between systems were reduced.", "Integration issues became easier to trace from request to business state."],
-      vi: ["Dữ liệu ERP tham gia được vào quy trình liên hệ thống liên tục.", "Giảm các bước bàn giao thủ công giữa hệ thống.", "Sự cố tích hợp dễ truy vết hơn từ request đến trạng thái nghiệp vụ."],
-    },
-    technologies: ["Odoo", "Python", "REST API", "PostgreSQL", "Docker", "Linux"],
-    visual: "integration",
+    "technologies": [
+      "Odoo",
+      "Python",
+      "REST API",
+      "PostgreSQL",
+      "Docker",
+      "Linux"
+    ],
+    "visual": "integration"
   },
   {
-    slug: "attendance-platform",
-    index: "04",
-    type: { en: "Mobile · Graduation project", vi: "Mobile · Đồ án tốt nghiệp" },
-    title: { en: "Attendance with identity and location checks", vi: "Điểm danh với xác thực danh tính và vị trí" },
-    summary: {
-      en: "An end-to-end attendance application combining a Flutter client, backend services, face recognition, and geofencing.",
-      vi: "Ứng dụng điểm danh đầu-cuối kết hợp Flutter, dịch vụ backend, nhận diện khuôn mặt và geofencing.",
+    "slug": "attendance-platform",
+    "index": "04",
+    "type": {
+      "en": "Mobile · Graduation project",
+      "vi": "Mobile · Đồ án tốt nghiệp"
     },
-    context: {
-      en: "The graduation project explored how mobile UX, identity verification, location rules, APIs, and deployment fit into one usable attendance flow.",
-      vi: "Đồ án tốt nghiệp khám phá cách kết hợp mobile UX, xác minh danh tính, quy tắc vị trí, API và deployment thành một luồng điểm danh có thể sử dụng.",
+    "title": {
+      "en": "Attendance application — graduation project",
+      "vi": "Ứng dụng điểm danh — đồ án tốt nghiệp"
     },
-    problem: {
-      en: "Attendance needed more context than a simple button press: the system had to coordinate user identity, location eligibility, backend records, and clear mobile feedback.",
-      vi: "Điểm danh cần nhiều ngữ cảnh hơn một lần nhấn nút: hệ thống phải phối hợp danh tính người dùng, điều kiện vị trí, dữ liệu backend và phản hồi rõ ràng trên mobile.",
+    "summary": {
+      "en": "A Flutter attendance application using face recognition and location checks, with backend services and a database.",
+      "vi": "Ứng dụng điểm danh Flutter sử dụng nhận diện khuôn mặt và kiểm tra vị trí, kết nối dịch vụ backend và cơ sở dữ liệu."
     },
-    role: {
-      en: "End-to-end product design and development across mobile UI, APIs, face-recognition service, database, and containerized deployment.",
-      vi: "Thiết kế và phát triển sản phẩm đầu-cuối từ mobile UI, API, dịch vụ nhận diện khuôn mặt, database đến triển khai container.",
+    "context": {
+      "en": "This graduation project combined mobile development, APIs, face recognition, and location rules in one attendance flow.",
+      "vi": "Đồ án tốt nghiệp kết hợp phát triển mobile, API, nhận diện khuôn mặt và quy tắc vị trí trong một luồng điểm danh."
     },
-    decisions: {
-      en: [
-        "Separate the mobile experience, application API, and recognition service by responsibility.",
-        "Treat face and location checks as visible steps with clear success or failure feedback.",
-        "Use containerized services to make the multi-stack development environment repeatable.",
+    "problem": {
+      "en": "The application needed to check identity and location before recording attendance, and show the user whether those checks had passed.",
+      "vi": "Ứng dụng cần kiểm tra danh tính và vị trí trước khi ghi nhận điểm danh, đồng thời thông báo cho người dùng kết quả của các bước kiểm tra."
+    },
+    "role": {
+      "en": "I designed and developed the mobile interface, APIs, recognition service, database, and containerized deployment.",
+      "vi": "Tôi thiết kế và phát triển giao diện mobile, API, dịch vụ nhận diện, cơ sở dữ liệu và cấu hình triển khai bằng container."
+    },
+    "approach": {
+      "en": [
+        "Separated the Flutter interface, application API, and face-recognition service.",
+        "Showed face and location check results in the attendance flow.",
+        "Configured the services in containers to run the application together."
       ],
-      vi: [
-        "Tách trải nghiệm mobile, application API và dịch vụ nhận diện theo đúng trách nhiệm.",
-        "Thể hiện kiểm tra khuôn mặt và vị trí thành các bước rõ ràng với phản hồi thành công hoặc thất bại.",
-        "Dùng container để môi trường phát triển đa stack có thể tái tạo nhất quán.",
+      "vi": [
+        "Tách giao diện Flutter, API ứng dụng và dịch vụ nhận diện khuôn mặt.",
+        "Hiển thị kết quả kiểm tra khuôn mặt và vị trí trong luồng điểm danh.",
+        "Cấu hình các dịch vụ bằng container để chạy ứng dụng cùng nhau."
+      ]
+    },
+    "validation": {
+      "en": [
+        "Checked locations inside and outside the permitted area.",
+        "Tested successful and failed face-recognition results.",
+        "Followed the attendance request through the API to the database."
       ],
+      "vi": [
+        "Kiểm tra vị trí nằm trong và ngoài vùng cho phép.",
+        "Kiểm thử kết quả nhận diện thành công và thất bại.",
+        "Theo dõi yêu cầu điểm danh qua API đến cơ sở dữ liệu."
+      ]
     },
-    validation: {
-      en: ["Eligible and ineligible geofence scenarios", "Recognition success and failure states", "API and database flow across services"],
-      vi: ["Tình huống trong và ngoài vùng geofence", "Trạng thái nhận diện thành công và thất bại", "Luồng API và database xuyên các dịch vụ"],
+    "delivered": {
+      "en": [
+        "Flutter attendance interface with identity and location feedback.",
+        "Application API, face-recognition service, and attendance records.",
+        "Container configuration for running the project services."
+      ],
+      "vi": [
+        "Giao diện điểm danh Flutter với phản hồi kiểm tra danh tính và vị trí.",
+        "API ứng dụng, dịch vụ nhận diện và dữ liệu điểm danh.",
+        "Cấu hình container để chạy các dịch vụ của đồ án."
+      ]
     },
-    outcomes: {
-      en: ["Demonstrated end-to-end product thinking beyond a single framework.", "Connected mobile interaction to backend and recognition services.", "Provided a deployable foundation for identity-aware attendance."],
-      vi: ["Thể hiện tư duy sản phẩm đầu-cuối vượt ra ngoài một framework.", "Kết nối tương tác mobile với backend và dịch vụ nhận diện.", "Tạo nền tảng có thể triển khai cho bài toán điểm danh gắn với danh tính."],
-    },
-    technologies: ["Flutter", "Laravel", "Flask", "PostgreSQL", "Docker", "Geofencing"],
-    visual: "attendance",
-  },
+    "technologies": [
+      "Flutter",
+      "Laravel",
+      "Flask",
+      "PostgreSQL",
+      "Docker",
+      "Geofencing"
+    ],
+    "visual": "attendance"
+  }
 ];
 
 export const experiences: Experience[] = [
@@ -211,8 +327,8 @@ export const experiences: Experience[] = [
     role: { en: "Software Engineer", vi: "Kỹ sư phần mềm" },
     period: { en: "Jul 2026 — Present", vi: "07/2026 — Hiện tại" },
     summary: {
-      en: "Building software with Node.js and Flutter in an on-site engineering role.",
-      vi: "Phát triển phần mềm với Node.js và Flutter trong vai trò kỹ sư làm việc tại văn phòng.",
+      en: "Developing backend and mobile features with Node.js and Flutter.",
+      vi: "Phát triển tính năng backend và mobile với Node.js và Flutter.",
     },
     technologies: ["Node.js", "Flutter"],
   },
@@ -221,8 +337,8 @@ export const experiences: Experience[] = [
     role: { en: "Odoo Developer", vi: "Lập trình viên Odoo" },
     period: { en: "Jun 2025 — Jul 2026", vi: "06/2025 — 07/2026" },
     summary: {
-      en: "Delivered ERP workflows across retail, purchasing, inventory, manufacturing, planning, subcontracting, and external integrations.",
-      vi: "Phát triển các workflow ERP cho bán lẻ, mua hàng, tồn kho, sản xuất, kế hoạch, gia công và tích hợp hệ thống ngoài.",
+      en: "Customized Odoo POS, Purchase, Inventory, and manufacturing workflows. Implemented business rules, views, reports, and external integrations.",
+      vi: "Tùy chỉnh Odoo POS, Purchase, Inventory và quy trình sản xuất. Triển khai quy tắc nghiệp vụ, màn hình, báo cáo và tích hợp hệ thống ngoài.",
     },
     technologies: ["Odoo", "Python", "PostgreSQL", "JavaScript"],
   },

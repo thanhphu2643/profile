@@ -12,15 +12,17 @@ type SiteHeaderProps = {
 
 const navigation = {
   en: [
+    { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
+    { label: "Process", href: "#about" },
     { label: "Experience", href: "#experience" },
-    { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
   vi: [
+    { label: "Dịch vụ", href: "#services" },
     { label: "Dự án", href: "#work" },
+    { label: "Cách làm việc", href: "#about" },
     { label: "Kinh nghiệm", href: "#experience" },
-    { label: "Giới thiệu", href: "#about" },
     { label: "Liên hệ", href: "#contact" },
   ],
 } as const;

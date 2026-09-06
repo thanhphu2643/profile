@@ -1,25 +1,35 @@
 import type { CaseStudy } from "@/content/portfolio";
+import type { Locale } from "@/lib/i18n";
 
 type WorkflowVisualProps = {
   variant: CaseStudy["visual"];
+  locale: Locale;
   compact?: boolean;
 };
 
-const visualContent: Record<CaseStudy["visual"], { label: string; nodes: string[] }> = {
-  retail: { label: "Order orchestration", nodes: ["PROMO", "ORDER", "PAYMENT", "RECEIPT"] },
-  manufacturing: { label: "Production trace", nodes: ["SALES", "MATERIAL", "MRP", "DELIVERY"] },
-  integration: { label: "System exchange", nodes: ["SOURCE", "API", "ODOO", "STATE"] },
-  attendance: { label: "Identity flow", nodes: ["MOBILE", "FACE", "GEOFENCE", "RECORD"] },
+const visualContent: Record<Locale, Record<CaseStudy["visual"], { label: string; nodes: string[] }>> = {
+  en: {
+    retail: { label: "POS & reconciliation", nodes: ["Order", "Payment", "Receipt", "Session report"] },
+    manufacturing: { label: "Production & subcontracting", nodes: ["Materials", "Production", "Vendor work", "Delivery"] },
+    integration: { label: "API data exchange", nodes: ["External data", "API", "Mapping", "Odoo records"] },
+    attendance: { label: "Attendance checks", nodes: ["Mobile", "Identity", "Location", "Attendance"] },
+  },
+  vi: {
+    retail: { label: "POS & đối soát", nodes: ["Đơn hàng", "Thanh toán", "Hóa đơn", "Báo cáo phiên"] },
+    manufacturing: { label: "Sản xuất & gia công", nodes: ["Vật tư", "Sản xuất", "Gia công", "Giao hàng"] },
+    integration: { label: "Trao đổi qua API", nodes: ["Dữ liệu ngoài", "API", "Ánh xạ", "Bản ghi Odoo"] },
+    attendance: { label: "Kiểm tra điểm danh", nodes: ["Mobile", "Danh tính", "Vị trí", "Điểm danh"] },
+  },
 };
 
-export function WorkflowVisual({ variant, compact = false }: WorkflowVisualProps) {
-  const content = visualContent[variant];
+export function WorkflowVisual({ variant, locale, compact = false }: WorkflowVisualProps) {
+  const content = visualContent[locale][variant];
 
   return (
-    <div className={`workflow-visual workflow-${variant}${compact ? " workflow-compact" : ""}`} aria-hidden="true">
+    <div className={`workflow-visual workflow-${variant}${compact ? " workflow-compact" : ""}`}>
       <div className="visual-header">
         <span>{content.label}</span>
-        <span className="visual-status"><i /> LIVE FLOW</span>
+        <span className="visual-status">{locale === "en" ? "Illustrative flow" : "Minh họa quy trình"}</span>
       </div>
       <div className="visual-flow">
         {content.nodes.map((node, index) => (
