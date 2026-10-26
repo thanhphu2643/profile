@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router";
 
 import { ArrowUpRightIcon } from "@/components/icons";
 import { WorkflowVisual } from "@/components/workflow-visual";
@@ -19,7 +19,7 @@ export function CaseStudyCard({ study, locale }: CaseStudyCardProps) {
   return (
     <article className="h-full">
       <SpotlightCard hue={hues[study.visual]} className="h-full transition-transform duration-300 hover:-translate-y-1">
-        <Link className="flex h-full flex-col" href={localizedPath(locale, `/work/${study.slug}`)} aria-label={`${study.title[locale]} — ${locale === "en" ? "read case study" : "xem case study"}`}>
+        <Link className="flex h-full flex-col" to={localizedPath(locale, `/work/${study.slug}`)} aria-label={`${study.title[locale]} — ${locale === "en" ? "read case study" : "xem case study"}`}>
           <WorkflowVisual variant={study.visual} locale={locale} compact />
           <div className="flex flex-1 flex-col p-6 sm:p-8">
             <CaseMeta index={study.index} type={study.type[locale]} />

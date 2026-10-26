@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "react-router";
 
 import { ArrowLeftIcon, ArrowUpRightIcon, CheckIcon, GitHubIcon, MailIcon } from "@/components/icons";
 import { CaseMeta } from "@/components/case-study-card";
@@ -73,7 +73,7 @@ export function CaseStudyPage({ study, locale }: CaseStudyPageProps) {
           <header className="relative -mt-[76px] overflow-hidden pt-[76px]">
             <GridBackground />
             <div className="shell relative pb-20 pt-10 md:pb-28 md:pt-16">
-              <Link className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-400 transition-all hover:-translate-x-1 hover:text-sky-300" href={`${localizedPath(locale)}#work`}>
+              <Link className="inline-flex min-h-11 items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-wider text-neutral-400 transition-all hover:-translate-x-1 hover:text-sky-300" to={`${localizedPath(locale)}#work`}>
                 <ArrowLeftIcon />{text.back}
               </Link>
               <div className="mt-10 grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
@@ -155,7 +155,7 @@ export function CaseStudyPage({ study, locale }: CaseStudyPageProps) {
 
           <nav className="shell pb-24" aria-label={text.next}>
             <Eyebrow>{text.next}</Eyebrow>
-            <Link className="group mt-5 flex items-center justify-between gap-6 border-b border-white/15 pb-8 text-3xl font-semibold tracking-tight text-white transition-colors hover:text-sky-300 sm:text-5xl" href={localizedPath(locale, `/work/${nextStudy.slug}`)}>
+            <Link className="group mt-5 flex items-center justify-between gap-6 border-b border-white/15 pb-8 text-3xl font-semibold tracking-tight text-white transition-colors hover:text-sky-300 sm:text-5xl" to={localizedPath(locale, `/work/${nextStudy.slug}`)}>
               <span>{nextStudy.title[locale]}</span>
               <ArrowUpRightIcon className="shrink-0 transition-transform group-hover:rotate-45" width={36} height={36} />
             </Link>

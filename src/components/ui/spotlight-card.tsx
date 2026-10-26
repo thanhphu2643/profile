@@ -1,5 +1,3 @@
-"use client";
-
 import { useRef, type CSSProperties, type PointerEvent, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";

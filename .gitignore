@@ -1,9 +1,8 @@
 # dependencies
 /node_modules
 
-# Next.js output
-/.next
-/out
+# build output
+/dist
 
 # testing
 /test-results
@@ -26,4 +25,3 @@ pnpm-debug.log*
 
 # TypeScript
 *.tsbuildinfo
-next-env.d.ts

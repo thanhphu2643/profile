@@ -1,60 +1,72 @@
-import type { Metadata } from "next";
+// Relative imports keep this module loadable from vite.config.ts, which runs outside the "@/" alias.
+import type { CaseStudy } from "../content/portfolio";
+import type { Locale } from "./i18n";
+import { localizedPath } from "./i18n";
 
-import type { CaseStudy } from "@/content/portfolio";
-import type { Locale } from "@/lib/i18n";
-import { localizedPath } from "@/lib/i18n";
-import { getSiteUrl } from "@/lib/site";
+export type PageMeta = {
+  locale: Locale;
+  title: string;
+  description: string;
+  path: string;
+  alternates: Record<Locale, string>;
+  type: "profile" | "article";
+};
 
 const descriptions = {
   en: "Odoo developer in Vietnam specializing in sales, purchasing, inventory, and manufacturing workflows. Custom websites, applications, and integrations.",
   vi: "Lập trình viên chuyên tùy chỉnh Odoo cho bán hàng, mua hàng, kho và sản xuất. Nhận phát triển website, ứng dụng và tích hợp hệ thống theo yêu cầu.",
 };
 
-export function homeMetadata(locale: Locale): Metadata {
-  const title = locale === "en" ? "Nguyen Thanh Phu — Odoo Developer | Web & Apps" : "Nguyễn Thanh Phú — Tùy chỉnh Odoo | Web & Ứng dụng";
-  const path = localizedPath(locale);
-
+export function homeMeta(locale: Locale): PageMeta {
   return {
-    metadataBase: getSiteUrl(),
-    title,
+    locale,
+    title: locale === "en" ? "Nguyen Thanh Phu — Odoo Developer | Web & Apps" : "Nguyễn Thanh Phú — Tùy chỉnh Odoo | Web & Ứng dụng",
     description: descriptions[locale],
-    alternates: {
-      canonical: path,
-      languages: { "en-US": "/", "vi-VN": "/vi" },
-    },
-    openGraph: {
-      title,
-      description: descriptions[locale],
-      type: "profile",
-      locale: locale === "en" ? "en_US" : "vi_VN",
-      url: path,
-      siteName: "Nguyen Thanh Phu",
-    },
-    twitter: { card: "summary_large_image", title, description: descriptions[locale] },
+    path: localizedPath(locale),
+    alternates: { en: "/", vi: "/vi" },
+    type: "profile",
   };
 }
 
-export function caseStudyMetadata(study: CaseStudy, locale: Locale): Metadata {
-  const path = localizedPath(locale, `/work/${study.slug}`);
-
+export function caseStudyMeta(study: CaseStudy, locale: Locale): PageMeta {
   return {
-    metadataBase: getSiteUrl(),
+    locale,
     title: `${study.title[locale]} — Nguyen Thanh Phu`,
     description: study.summary[locale],
-    alternates: {
-      canonical: path,
-      languages: {
-        "en-US": `/work/${study.slug}`,
-        "vi-VN": `/vi/work/${study.slug}`,
-      },
-    },
-    openGraph: {
-      title: study.title[locale],
-      description: study.summary[locale],
-      type: "article",
-      locale: locale === "en" ? "en_US" : "vi_VN",
-      url: path,
-    },
-    twitter: { card: "summary_large_image", title: study.title[locale], description: study.summary[locale] },
+    path: localizedPath(locale, `/work/${study.slug}`),
+    alternates: { en: `/work/${study.slug}`, vi: `/vi/work/${study.slug}` },
+    type: "article",
   };
+}
+
+const escape = (value: string) => value.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+
+// Head tags as an HTML string, so the build can bake them into each route's index.html
+// and the client can swap them on navigation. Every tag carries data-meta for replacement.
+export function headTags(meta: PageMeta, siteUrl: string): string {
+  const url = (path: string) => escape(new URL(path, siteUrl).toString());
+  const image = url(`/og-${meta.locale}.png`);
+  const title = escape(meta.title);
+  const description = escape(meta.description);
+
+  return [
+    `<title data-meta>${title}</title>`,
+    `<meta data-meta name="description" content="${description}">`,
+    `<link data-meta rel="canonical" href="${url(meta.path)}">`,
+    `<link data-meta rel="alternate" hreflang="en-US" href="${url(meta.alternates.en)}">`,
+    `<link data-meta rel="alternate" hreflang="vi-VN" href="${url(meta.alternates.vi)}">`,
+    `<meta data-meta property="og:title" content="${title}">`,
+    `<meta data-meta property="og:description" content="${description}">`,
+    `<meta data-meta property="og:type" content="${meta.type}">`,
+    `<meta data-meta property="og:locale" content="${meta.locale === "en" ? "en_US" : "vi_VN"}">`,
+    `<meta data-meta property="og:url" content="${url(meta.path)}">`,
+    `<meta data-meta property="og:site_name" content="Nguyen Thanh Phu">`,
+    `<meta data-meta property="og:image" content="${image}">`,
+    `<meta data-meta property="og:image:width" content="1200">`,
+    `<meta data-meta property="og:image:height" content="630">`,
+    `<meta data-meta name="twitter:card" content="summary_large_image">`,
+    `<meta data-meta name="twitter:title" content="${title}">`,
+    `<meta data-meta name="twitter:description" content="${description}">`,
+    `<meta data-meta name="twitter:image" content="${image}">`,
+  ].join("\n    ");
 }

@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 import { ArrowUpRightIcon, CheckIcon, DownloadIcon, GitHubIcon, MailIcon } from "@/components/icons";
 import { CaseStudyCard } from "@/components/case-study-card";
@@ -72,13 +71,13 @@ export function HomePage({ locale }: HomePageProps) {
               <div className="relative">
                 <div aria-hidden="true" className="animate-move-gradient absolute -inset-3 rounded-[28px] bg-gradient-to-r from-blue-600 via-sky-400 to-violet-500 bg-[length:200%_200%] opacity-40 blur-2xl" />
                 <div className="hero-portrait relative aspect-[3/4] overflow-hidden rounded-3xl border border-white/15 bg-neutral-900">
-                  <Image
-                    src="/profile.jpg"
+                  <img
+                    src="/profile-portrait.jpg"
                     alt={locale === "vi" ? "Ảnh chân dung Nguyễn Thanh Phú" : "Portrait of Nguyen Thanh Phu"}
-                    fill
-                    sizes="(max-width: 1024px) min(100vw - 40px, 340px), 340px"
-                    loading="eager"
-                    className="object-cover object-[center_25%]"
+                    width={720}
+                    height={1080}
+                    fetchPriority="high"
+                    className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
                   />
                   <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-neutral-950/80 to-transparent" />
                 </div>

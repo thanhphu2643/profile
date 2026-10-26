@@ -1,6 +1,4 @@
-"use client";
-
-import Link from "next/link";
+import { Link } from "react-router";
 import { useEffect, useState } from "react";
 
 import { DownloadIcon, MenuIcon, XIcon } from "@/components/icons";
@@ -55,14 +53,14 @@ export function SiteHeader({ locale, currentPath = "" }: SiteHeaderProps) {
         )}
       >
         <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-5">
-          <Link className="group flex min-h-11 items-center gap-3" href={homePath} aria-label={`${siteConfig.name} — home`}>
+          <Link className="group flex min-h-11 items-center gap-3" to={homePath} aria-label={`${siteConfig.name} — home`}>
             <span className="grid h-9 w-9 place-items-center rounded-full bg-white font-mono text-xs font-bold text-neutral-950 transition-transform group-hover:scale-110">NP</span>
             <strong className="text-sm font-semibold tracking-tight text-white">Nguyen Thanh Phu</strong>
           </Link>
 
           <nav className="hidden items-center gap-7 lg:flex" aria-label={locale === "en" ? "Primary navigation" : "Điều hướng chính"}>
             {navigation[locale].map((item) => (
-              <Link key={item.href} href={`${homePath}${item.href}`} className="group relative py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white">
+              <Link key={item.href} to={`${homePath}${item.href}`} className="group relative py-2 text-sm font-medium text-neutral-400 transition-colors hover:text-white">
                 {item.label}
                 <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-sky-400 transition-all duration-300 group-hover:w-full" />
               </Link>
@@ -70,7 +68,7 @@ export function SiteHeader({ locale, currentPath = "" }: SiteHeaderProps) {
           </nav>
 
           <div className="flex items-center gap-1.5">
-            <Link className="grid min-h-11 min-w-11 place-items-center rounded-full font-mono text-xs font-semibold text-neutral-400 transition-colors hover:text-white" href={localePath} hrefLang={otherLocale}>
+            <Link className="grid min-h-11 min-w-11 place-items-center rounded-full font-mono text-xs font-semibold text-neutral-400 transition-colors hover:text-white" to={localePath} hrefLang={otherLocale}>
               {otherLocale.toUpperCase()}
             </Link>
             <a
@@ -105,7 +103,7 @@ export function SiteHeader({ locale, currentPath = "" }: SiteHeaderProps) {
               {navigation[locale].map((item) => (
                 <Link
                   key={item.href}
-                  href={`${homePath}${item.href}`}
+                  to={`${homePath}${item.href}`}
                   onClick={() => setIsMenuOpen(false)}
                   className="rounded-xl px-3 py-3 text-sm font-medium text-neutral-300 transition-colors hover:bg-white/5 hover:text-white"
                 >
