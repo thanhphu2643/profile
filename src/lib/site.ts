@@ -5,6 +5,7 @@ export const siteConfig = {
   linkedinUrl: "",
   resumePath: "/resume/nguyen-thanh-phu-software-engineer.pdf",
   location: "Ho Chi Minh City, Vietnam",
+  umamiWebsiteId: "a2dcb361-3931-4f70-b31c-c30c25327b29",
 } as const;
 
 export function getSiteUrl(): string {
