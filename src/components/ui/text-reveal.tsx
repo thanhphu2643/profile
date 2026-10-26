@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 import { AuroraText } from "@/components/ui/aurora-text";
 
-// Adapted from Sera UI "Text Reveal": words fade in from a blur, one after another.
+// Adapted from Sera UI "Text Reveal": words fade up one after another.
 // Spaces stay in the text so the heading reads naturally to assistive technology.
 type TextRevealProps = {
   segments: { text: string; accent?: boolean }[];
@@ -17,7 +17,7 @@ export function TextReveal({ segments }: TextRevealProps) {
         <span key={index}>
           <motion.span
             className="inline-block"
-            variants={{ hidden: { opacity: 0, y: 20, filter: "blur(10px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)" } }}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
             {accent ? <AuroraText>{word}</AuroraText> : word}

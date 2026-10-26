@@ -6,8 +6,6 @@
 
   --animate-aurora: aurora 10s ease-in-out infinite;
   --animate-move-bg: move-bg 8s linear infinite;
-  --animate-move-grid: move-grid 20s linear infinite;
-  --animate-move-gradient: move-gradient 6s ease-in-out infinite;
   --animate-shimmer-spin: shimmer-spin 2.5s linear infinite;
 
   @keyframes aurora {
@@ -16,13 +14,6 @@
   }
   @keyframes move-bg {
     to { background-position: 400% 0; }
-  }
-  @keyframes move-grid {
-    to { background-position: 80px 80px; }
-  }
-  @keyframes move-gradient {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
   }
   @keyframes shimmer-spin {
     to { --angle: 360deg; }
@@ -149,8 +140,6 @@ body {
   .marquee-track,
   .animate-aurora,
   .animate-move-bg,
-  .animate-move-grid,
-  .animate-move-gradient,
   .animate-shimmer-spin {
     animation: none;
   }

@@ -49,7 +49,7 @@ export function SiteHeader({ locale, currentPath = "" }: SiteHeaderProps) {
       <div
         className={cn(
           "mx-auto max-w-6xl rounded-2xl border transition-all duration-300",
-          isScrolled || isMenuOpen ? "border-white/10 bg-neutral-950/80 shadow-[0_8px_40px_rgb(0_0_0/0.45)] backdrop-blur-xl" : "border-transparent bg-transparent",
+          isScrolled || isMenuOpen ? "border-white/10 bg-neutral-950/95 shadow-[0_8px_40px_rgb(0_0_0/0.45)]" : "border-transparent bg-transparent",
         )}
       >
         <div className="flex h-16 items-center justify-between gap-4 px-4 sm:px-5">

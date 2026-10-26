@@ -69,7 +69,7 @@ export function HomePage({ locale }: HomePageProps) {
             </div>
             <Reveal delay={0.2} className="mx-auto w-full max-w-[340px]">
               <div className="relative">
-                <div aria-hidden="true" className="animate-move-gradient absolute -inset-3 rounded-[28px] bg-gradient-to-r from-blue-600 via-sky-400 to-violet-500 bg-[length:200%_200%] opacity-40 blur-2xl" />
+                <div aria-hidden="true" className="absolute -inset-10 bg-[radial-gradient(closest-side,rgb(56_189_248/0.35),rgb(99_102_241/0.15)_60%,transparent)]" />
                 <div className="hero-portrait relative aspect-[3/4] overflow-hidden rounded-3xl border border-white/15 bg-neutral-900">
                   <img
                     src="/profile-portrait.jpg"

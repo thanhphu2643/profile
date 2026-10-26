@@ -43,7 +43,7 @@ export function WorkflowVisual({ variant, locale, compact = false }: WorkflowVis
       </div>
       <div className={cn("relative grid grid-cols-2 gap-3 px-6 pb-6 @xl:grid-cols-4 @xl:gap-4", compact ? "pt-4" : "pt-16 @xl:pt-24")}>
         {content.nodes.map((node, index) => (
-          <div key={node} className="relative flex min-h-20 flex-col justify-center gap-1.5 rounded-xl border border-white/15 bg-white/[0.06] p-3.5 backdrop-blur-sm">
+          <div key={node} className="relative flex min-h-20 flex-col justify-center gap-1.5 rounded-xl border border-white/15 bg-white/[0.06] p-3.5">
             <span className="font-mono text-[9px] text-white/45">0{index + 1}</span>
             <strong className="font-mono text-xs tracking-wide text-white">{node}</strong>
             {index < content.nodes.length - 1 ? (
